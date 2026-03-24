@@ -1,0 +1,28 @@
+{
+  "quotes": [
+    {
+      "id": "q1",
+      "text": "Replace with actual quote from SXSW session or conversation.",
+      "attribution": "Speaker Name",
+      "role": "Title, Company",
+      "context": "Session or event name",
+      "color": "green"
+    },
+    {
+      "id": "q2",
+      "text": "Replace with actual quote.",
+      "attribution": "Speaker Name",
+      "role": "Title, Company",
+      "context": "Session or event name",
+      "color": "coral"
+    },
+    {
+      "id": "q3",
+      "text": "Replace with actual quote.",
+      "attribution": "Speaker Name",
+      "role": "Title, Company",
+      "context": "Session or event name",
+      "color": "dark"
+    }
+  ]
+}

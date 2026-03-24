@@ -1,0 +1,52 @@
+{
+  "series": {
+    "title": "The SXSW 2026 Series",
+    "description": "6 dispatches from 7 days in Austin.",
+    "platform": "LinkedIn",
+    "publishedDate": "March 2026"
+  },
+  "articles": [
+    {
+      "number": 1,
+      "title": "Replace with article 1 title",
+      "publishedDate": "2026-03-13",
+      "excerpt": "Replace with 2-3 sentence excerpt.",
+      "url": ""
+    },
+    {
+      "number": 2,
+      "title": "Replace with article 2 title",
+      "publishedDate": "2026-03-14",
+      "excerpt": "Replace with 2-3 sentence excerpt.",
+      "url": ""
+    },
+    {
+      "number": 3,
+      "title": "Replace with article 3 title",
+      "publishedDate": "2026-03-15",
+      "excerpt": "Replace with 2-3 sentence excerpt.",
+      "url": ""
+    },
+    {
+      "number": 4,
+      "title": "Replace with article 4 title",
+      "publishedDate": "2026-03-16",
+      "excerpt": "Replace with 2-3 sentence excerpt.",
+      "url": ""
+    },
+    {
+      "number": 5,
+      "title": "Replace with article 5 title",
+      "publishedDate": "2026-03-17",
+      "excerpt": "Replace with 2-3 sentence excerpt.",
+      "url": ""
+    },
+    {
+      "number": 6,
+      "title": "Replace with article 6 title",
+      "publishedDate": "2026-03-18",
+      "excerpt": "Replace with 2-3 sentence excerpt.",
+      "url": ""
+    }
+  ]
+}

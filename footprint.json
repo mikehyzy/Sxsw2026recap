@@ -1,0 +1,36 @@
+{
+  "footprint": [
+    {
+      "id": "workshop",
+      "title": "Workshop",
+      "subtitle": "Artistic Disruption for Business Innovation",
+      "description": "Co-led with Michael Marshall. Surrealist, Situationist, and Futurist methods applied to business innovation.",
+      "date": "2026-03-00",
+      "link": "/workshop"
+    },
+    {
+      "id": "braindate",
+      "title": "Braindate",
+      "subtitle": "Why Your AI Strategy Needs an Artist",
+      "description": "Roundtable conversation on the artist-engineer convergence in AI teams.",
+      "date": "2026-03-00",
+      "link": "/roundtable"
+    },
+    {
+      "id": "book-signing",
+      "title": "Book Signing",
+      "subtitle": "Gamification for Product Excellence",
+      "description": "Signed copies at SXSW. Published by Packt.",
+      "date": "2026-03-00",
+      "link": "/book"
+    },
+    {
+      "id": "linkedin-series",
+      "title": "LinkedIn Series",
+      "subtitle": "6-Part SXSW Coverage",
+      "description": "Daily dispatches covering the full week.",
+      "date": "2026-03-13",
+      "link": "/linkedin-series"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "categories": [
+    {
+      "name": "AI & Machine Learning Platforms",
+      "borderColor": "tech-ai",
+      "resources": []
+    },
+    {
+      "name": "Governance & Safety Frameworks",
+      "borderColor": "design",
+      "resources": []
+    },
+    {
+      "name": "Creative & Design Tools",
+      "borderColor": "coral",
+      "resources": []
+    },
+    {
+      "name": "Data & Analytics",
+      "borderColor": "periwinkle",
+      "resources": []
+    },
+    {
+      "name": "Books & Publications",
+      "borderColor": "film-tv",
+      "resources": []
+    }
+  ],
+  "_resourceTemplate": {
+    "name": "Tool Name",
+    "description": "One-line description of what it does.",
+    "url": "https://example.com",
+    "category": "Category name from above",
+    "mentionedIn": ["session-slug-1", "session-slug-2"]
+  }
+}
