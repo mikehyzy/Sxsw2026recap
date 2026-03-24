@@ -1,0 +1,18 @@
+{
+  "eventStats": [
+    { "value": "850+", "label": "Conference Sessions", "source": "official" },
+    { "value": "4,400", "label": "Musicians", "source": "official" },
+    { "value": "375+", "label": "Film & TV Screenings", "source": "official" },
+    { "value": "300+", "label": "Live Showcases", "source": "official" },
+    { "value": "450", "label": "Brand Activations", "source": "official" },
+    { "value": "600+", "label": "Mentor & Networking Events", "source": "official" }
+  ],
+  "personalStats": [
+    { "value": "0", "label": "Sessions Attended", "source": "personal" },
+    { "value": "6", "label": "LinkedIn Articles Published", "source": "personal" },
+    { "value": "1", "label": "Workshop Led", "source": "personal" },
+    { "value": "1", "label": "Braindate Hosted", "source": "personal" },
+    { "value": "1", "label": "Book Signing", "source": "personal" },
+    { "value": "0", "label": "Connections Made", "source": "personal" }
+  ]
+}
