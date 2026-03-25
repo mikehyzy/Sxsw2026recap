@@ -3,8 +3,8 @@
     {
       "id": "q1",
       "text": "We're entering the era of super companies. Super companies will be the only companies, in my opinion, that survive.",
-      "attribution": "AI Company CEO",
-      "role": "Founder, 7th startup",
+      "attribution": "Greg Shove",
+      "role": "CEO, Section AI",
       "context": "Lose Your Mind to AI",
       "color": "green"
     },
@@ -35,8 +35,8 @@
     {
       "id": "q5",
       "text": "75% of you will be passengers. 25% will be drivers. I think this is default best case. It's not good.",
-      "attribution": "AI Company CEO",
-      "role": "Founder, 7th startup",
+      "attribution": "Greg Shove",
+      "role": "CEO, Section AI",
       "context": "Lose Your Mind to AI",
       "color": "coral"
     },

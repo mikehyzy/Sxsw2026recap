@@ -17,7 +17,7 @@ const stats = [
 const heroQuotes = [
   {
     text: "We're entering the era of super companies. Super companies will be the only companies, in my opinion, that survive.",
-    speaker: "AI Company CEO",
+    speaker: "Greg Shove, CEO of Section AI",
     session: "Lose Your Mind to AI",
     bg: "#12674A",
   },
@@ -38,7 +38,7 @@ const heroQuotes = [
 const secondaryQuotes = [
   {
     text: "75% of you will be passengers. 25% will be drivers. I think this is default best case. It's not good.",
-    speaker: "AI Company CEO",
+    speaker: "Greg Shove, CEO of Section AI",
     session: "Lose Your Mind to AI",
     bg: "#0A0A0A",
   },
@@ -372,7 +372,7 @@ export function Home() {
 
             <InlinePullQuote
               text="75% of you will be passengers. 25% will be drivers. I think this is default best case. It's not good."
-              speaker="AI Company CEO"
+              speaker="Greg Shove, CEO of Section AI"
               session="Lose Your Mind to AI"
             />
 
