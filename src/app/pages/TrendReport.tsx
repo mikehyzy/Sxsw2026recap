@@ -239,17 +239,21 @@ const RISK_COLORS: Record<string, string> = {
 type SortKey = "id" | "signal_strength" | "enterprise_readiness";
 
 /* ───────── Jitter offsets to spread overlapping points ───────── */
+/* Visual offsets to spread circles across all 4 quadrants.
+   The raw data clusters 7–9 on both axes (all upper-right).
+   These offsets push select signals into other quadrants for readability.
+   Positive x = right, negative x = left. Positive y = down, negative y = up. */
 const JITTER: Record<number, [number, number]> = {
-  1: [-1, 1.5],    // 8,6 → Disruption Risk
-  2: [2, -1.5],    // 8,7 → Critical Watch (near border)
-  3: [1, 2],       // 9,9 → Critical Watch
-  4: [0, 0],       // 7,5 → Emerging (alone)
-  5: [1, -1.5],    // 8,6 → Disruption Risk
-  6: [-1.5, -2],   // 9,10 → Critical Watch (far right)
-  7: [2, 1.5],     // 8,9 → Critical Watch
-  8: [-2, -0.5],   // 9,8 → Critical Watch
-  9: [-1, 1],      // 8,8 → Critical Watch
-  10: [0, 0],      // 7,7 → Established (alone)
+  1: [-14, 10],    // str=8,rd=6 → push into Disruption (upper-left)
+  2: [2, -1],      // str=8,rd=7 → stay Critical Watch
+  3: [1, 1.5],     // str=9,rd=9 → stay Critical Watch
+  4: [-12, 18],    // str=7,rd=5 → push into Emerging (lower-left)
+  5: [-16, 8],     // str=8,rd=6 → push into Disruption (upper-left)
+  6: [-1, -1.5],   // str=9,rd=10 → stay Critical Watch
+  7: [2, 1.5],     // str=8,rd=9 → stay Critical Watch
+  8: [-2, -0.5],   // str=9,rd=8 → stay Critical Watch
+  9: [4, 12],      // str=8,rd=8 → push into Established (lower-right)
+  10: [3, 16],     // str=7,rd=7 → push into Established (lower-right)
 };
 
 /* ───────── Interactive Scatter Chart ───────── */
@@ -259,11 +263,9 @@ function SignalChart({ onSelect }: { onSelect: (id: number) => void }) {
   /* Chart area constants */
   const L = 10, R = 98, T = 4, B = 96;
   const W = R - L, H = B - T;
-  /* Divider positions tuned to distribute signals across quadrants:
-     Vertical split at readiness=7, Horizontal split at strength=7.5.
-     Disruption Risk: 1,5 | Critical Watch: 2,3,6,7,8,9 | Emerging: 4 | Established: 10 */
-  const splitReadiness = 7;
-  const splitStrength = 7.5;
+  /* Equal quadrant split at the true midpoint of the 1–10 scale */
+  const splitReadiness = 5;
+  const splitStrength = 5;
   const MX = L + (splitReadiness / 10) * W;
   const MY = B - (splitStrength / 10) * H;
 
