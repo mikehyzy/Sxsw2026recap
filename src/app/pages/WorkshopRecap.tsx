@@ -265,8 +265,8 @@ export function WorkshopRecap() {
           <h2 className="text-white mb-8" style={{ fontSize: 28, fontWeight: 700 }}>Photo Gallery</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
-              "broll/DJI_1_frame_0003.jpg", "broll/DJI_1_frame_0007.jpg", "broll/DJI_1_frame_0009.jpg", "broll/DJI_1_frame_0014.jpg",
-              "broll/DJI_2_frame_0001.jpg", "broll/DJI_2_frame_0010.jpg",
+              "broll/DJI_1_frame_0003.jpg", "broll/DJI_1_frame_0007.jpg", "broll/DJI_1_frame_0014.jpg",
+              "broll/DJI_2_frame_0001.jpg",
               "canon/MVI_5628_frame_0003.jpg", "canon/MVI_5629_frame_0002.jpg",
               "canon/MVI_5630_frame_0005.jpg", "canon/MVI_5631_frame_0001.jpg",
               "canon/MVI_5632_frame_0002.jpg", "canon/MVI_5632_frame_0008.jpg",
