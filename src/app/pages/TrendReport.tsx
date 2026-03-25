@@ -247,13 +247,13 @@ const JITTER: Record<number, [number, number]> = {
   1: [-14, 10],    // str=8,rd=6 → push into Disruption (upper-left)
   2: [2, -1],      // str=8,rd=7 → stay Critical Watch
   3: [1, 1.5],     // str=9,rd=9 → stay Critical Watch
-  4: [-12, 18],    // str=7,rd=5 → push into Emerging (lower-left)
+  4: [-12, 28],    // str=7,rd=5 → push deep into Emerging (lower-left)
   5: [-16, 8],     // str=8,rd=6 → push into Disruption (upper-left)
   6: [-1, -1.5],   // str=9,rd=10 → stay Critical Watch
   7: [2, 1.5],     // str=8,rd=9 → stay Critical Watch
   8: [-2, -0.5],   // str=9,rd=8 → stay Critical Watch
   9: [4, 12],      // str=8,rd=8 → push into Established (lower-right)
-  10: [3, 16],     // str=7,rd=7 → push into Established (lower-right)
+  10: [3, 26],     // str=7,rd=7 → push deep into Established (lower-right)
 };
 
 /* ───────── Interactive Scatter Chart ───────── */
@@ -320,12 +320,19 @@ function SignalChart({ onSelect }: { onSelect: (id: number) => void }) {
           Signal Strength →
         </div>
 
-        {/* Data points with jitter */}
+        {/* Data points with jitter — color matches quadrant */}
         {signals.map((s) => {
           const [jx, jy] = JITTER[s.id] || [0, 0];
           const x = L + (s.enterprise_readiness / 10) * W + jx;
           const y = B - (s.signal_strength / 10) * H + jy;
           const isHovered = hovered === s.id;
+          // Determine quadrant color based on visual position
+          const inLeft = x < MX;
+          const inTop = y < MY;
+          const qColor = inTop && inLeft ? C.pink     // Disruption Risk
+                       : inTop && !inLeft ? C.yellow   // Critical Watch
+                       : !inTop && inLeft ? C.lavender // Emerging
+                       : C.mint;                        // Established
           return (
             <div key={s.id}>
               <button
@@ -335,10 +342,10 @@ function SignalChart({ onSelect }: { onSelect: (id: number) => void }) {
                   top: `${y}%`,
                   width: isHovered ? 40 : 28,
                   height: isHovered ? 40 : 28,
-                  backgroundColor: s.color,
+                  backgroundColor: qColor,
                   border: `2px solid ${isHovered ? "white" : "transparent"}`,
                   zIndex: isHovered ? 50 : 10,
-                  boxShadow: isHovered ? `0 0 20px ${s.color}80` : "none",
+                  boxShadow: isHovered ? `0 0 20px ${qColor}80` : "none",
                 }}
                 onMouseEnter={() => setHovered(s.id)}
                 onMouseLeave={() => setHovered(null)}
@@ -500,15 +507,18 @@ export function TrendReport() {
           <div className="rounded-lg p-6" style={{ backgroundColor: C.darkGray }}>
             <SignalChart onSelect={selectSignal} />
           </div>
-          <div className="flex flex-wrap gap-3 mt-6 justify-center">
+          <div className="flex flex-wrap gap-5 mt-6 justify-center">
             <span className="flex items-center gap-2" style={{ fontSize: 12, color: C.gray }}>
-              <span className="w-3 h-3 rounded-full" style={{ backgroundColor: C.yellow }} /> CRITICAL
+              <span className="w-3 h-3 rounded-full" style={{ backgroundColor: C.pink }} /> Disruption Risk
             </span>
             <span className="flex items-center gap-2" style={{ fontSize: 12, color: C.gray }}>
-              <span className="w-3 h-3 rounded-full" style={{ backgroundColor: C.pink }} /> HIGH
+              <span className="w-3 h-3 rounded-full" style={{ backgroundColor: C.yellow }} /> Critical Watch
             </span>
             <span className="flex items-center gap-2" style={{ fontSize: 12, color: C.gray }}>
-              <span className="w-3 h-3 rounded-full" style={{ backgroundColor: C.mint }} /> MEDIUM
+              <span className="w-3 h-3 rounded-full" style={{ backgroundColor: C.lavender }} /> Emerging
+            </span>
+            <span className="flex items-center gap-2" style={{ fontSize: 12, color: C.gray }}>
+              <span className="w-3 h-3 rounded-full" style={{ backgroundColor: C.mint }} /> Established
             </span>
           </div>
         </div>
