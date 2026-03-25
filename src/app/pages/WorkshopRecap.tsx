@@ -259,23 +259,6 @@ export function WorkshopRecap() {
         </div>
       </section>
 
-      {/* ───────── Photo Gallery ───────── */}
-      <section style={{ backgroundColor: C.black }} className="py-16">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <h2 className="text-white mb-8" style={{ fontSize: 28, fontWeight: 700 }}>Photo Gallery</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {[
-              "broll/DJI_1_frame_0003.jpg", "broll/DJI_1_frame_0007.jpg", "broll/DJI_1_frame_0014.jpg",
-              "broll/DJI_2_frame_0001.jpg",
-              "canon/MVI_5628_frame_0003.jpg", "canon/MVI_5629_frame_0002.jpg",
-              "canon/MVI_5630_frame_0005.jpg", "canon/MVI_5631_frame_0001.jpg",
-              "canon/MVI_5632_frame_0002.jpg", "canon/MVI_5632_frame_0008.jpg",
-            ].map((p) => (
-              <WImg key={p} src={img(p)} alt="Workshop photo" className="aspect-video" />
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ───────── Connection to SXSW Themes ───────── */}
       <section style={{ backgroundColor: C.lightBg }} className="py-16">
