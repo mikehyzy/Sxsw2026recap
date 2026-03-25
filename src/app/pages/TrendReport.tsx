@@ -256,64 +256,68 @@ const JITTER: Record<number, [number, number]> = {
 function SignalChart({ onSelect }: { onSelect: (id: number) => void }) {
   const [hovered, setHovered] = useState<number | null>(null);
 
+  /* Chart area: left=10, right=98, top=4, bottom=96 => w=88, h=92. Midpoint at 54, 50 */
+  const L = 10, R = 98, T = 4, B = 96;
+  const W = R - L, H = B - T;
+  const MX = L + W / 2; // 54 — vertical midpoint
+  const MY = T + H / 2; // 50 — horizontal midpoint
+
   return (
     <div className="relative w-full" style={{ paddingBottom: "60%", minHeight: 400 }}>
       <div className="absolute inset-0">
-        {/* SVG grid, quadrant lines, and labels */}
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
           {/* Minor grid */}
           {[1,2,3,4,5,6,7,8,9,10].map((v) => (
-            <line key={`h${v}`} x1="8" y1={95 - (v / 10) * 85} x2="98" y2={95 - (v / 10) * 85} stroke="rgba(255,255,255,0.06)" strokeWidth="0.2" />
+            <line key={`h${v}`} x1={L} y1={B - (v / 10) * H} x2={R} y2={B - (v / 10) * H} stroke="rgba(255,255,255,0.06)" strokeWidth="0.2" />
           ))}
           {[1,2,3,4,5,6,7,8,9,10].map((v) => (
-            <line key={`v${v}`} x1={(v / 10) * 88 + 8} y1="2" x2={(v / 10) * 88 + 8} y2="95" stroke="rgba(255,255,255,0.06)" strokeWidth="0.2" />
+            <line key={`v${v}`} x1={L + (v / 10) * W} y1={T} x2={L + (v / 10) * W} y2={B} stroke="rgba(255,255,255,0.06)" strokeWidth="0.2" />
           ))}
           {/* Axis tick labels */}
           {[2,4,6,8,10].map((v) => (
-            <text key={`yl${v}`} x="6" y={95 - (v / 10) * 85 + 1} fill="rgba(255,255,255,0.3)" fontSize="2.2" textAnchor="end">{v}</text>
+            <text key={`yl${v}`} x={L - 2} y={B - (v / 10) * H + 1} fill="rgba(255,255,255,0.3)" fontSize="2.2" textAnchor="end">{v}</text>
           ))}
           {[2,4,6,8,10].map((v) => (
-            <text key={`xl${v}`} x={(v / 10) * 88 + 8} y="99" fill="rgba(255,255,255,0.3)" fontSize="2.2" textAnchor="middle">{v}</text>
+            <text key={`xl${v}`} x={L + (v / 10) * W} y={B + 4} fill="rgba(255,255,255,0.3)" fontSize="2.2" textAnchor="middle">{v}</text>
           ))}
-          {/* QUADRANT DIVIDER LINES — thick and visible */}
-          {/* Horizontal: signal_strength = 7.5 (between 7 and 8) */}
-          <line x1="8" y1={95 - (7.5 / 10) * 85} x2="98" y2={95 - (7.5 / 10) * 85} stroke="rgba(255,255,255,0.25)" strokeWidth="0.4" strokeDasharray="2,1" />
-          {/* Vertical: enterprise_readiness = 7.5 */}
-          <line x1={(7.5 / 10) * 88 + 8} y1="2" x2={(7.5 / 10) * 88 + 8} y2="95" stroke="rgba(255,255,255,0.25)" strokeWidth="0.4" strokeDasharray="2,1" />
 
-          {/* Quadrant background tints */}
-          <rect x="8" y="2" width={(7.5/10)*88} height={95 - (95 - (7.5/10)*85)} rx="1" fill="rgba(255,182,208,0.04)" />
-          <rect x={(7.5/10)*88+8} y="2" width={98-(7.5/10)*88-8} height={95 - (95 - (7.5/10)*85)} rx="1" fill="rgba(255,199,0,0.04)" />
-          <rect x="8" y={95 - (7.5/10)*85} width={(7.5/10)*88} height={(7.5/10)*85} rx="1" fill="rgba(192,168,240,0.04)" />
-          <rect x={(7.5/10)*88+8} y={95 - (7.5/10)*85} width={98-(7.5/10)*88-8} height={(7.5/10)*85} rx="1" fill="rgba(168,245,200,0.04)" />
+          {/* QUADRANT DIVIDER LINES — equal split */}
+          <line x1={L} y1={MY} x2={R} y2={MY} stroke="rgba(255,255,255,0.3)" strokeWidth="0.4" strokeDasharray="2,1" />
+          <line x1={MX} y1={T} x2={MX} y2={B} stroke="rgba(255,255,255,0.3)" strokeWidth="0.4" strokeDasharray="2,1" />
 
-          {/* Quadrant labels */}
-          <text x={(8 + (7.5/10)*88 + 8) / 2} y="8" fill={C.pink} fontSize="2.8" textAnchor="middle" fontWeight="700" opacity="0.6">DISRUPTION RISK</text>
-          <text x={(8 + (7.5/10)*88 + 8) / 2} y="11.5" fill="rgba(255,255,255,0.25)" fontSize="1.8" textAnchor="middle">High signal, low readiness</text>
+          {/* Quadrant background tints — all equal size */}
+          <rect x={L}  y={T}  width={W/2} height={H/2} rx="1" fill="rgba(255,182,208,0.05)" />
+          <rect x={MX} y={T}  width={W/2} height={H/2} rx="1" fill="rgba(255,199,0,0.05)" />
+          <rect x={L}  y={MY} width={W/2} height={H/2} rx="1" fill="rgba(192,168,240,0.05)" />
+          <rect x={MX} y={MY} width={W/2} height={H/2} rx="1" fill="rgba(168,245,200,0.05)" />
 
-          <text x={(98 + (7.5/10)*88 + 8) / 2} y="8" fill={C.yellow} fontSize="2.8" textAnchor="middle" fontWeight="700" opacity="0.6">CRITICAL WATCH</text>
-          <text x={(98 + (7.5/10)*88 + 8) / 2} y="11.5" fill="rgba(255,255,255,0.25)" fontSize="1.8" textAnchor="middle">High signal, high readiness</text>
+          {/* Quadrant labels — centered in each equal box */}
+          <text x={L + W/4} y={T + H/4 - 3} fill={C.pink} fontSize="2.8" textAnchor="middle" fontWeight="700" opacity="0.6">DISRUPTION RISK</text>
+          <text x={L + W/4} y={T + H/4} fill="rgba(255,255,255,0.25)" fontSize="1.8" textAnchor="middle">High signal, low readiness</text>
 
-          <text x={(8 + (7.5/10)*88 + 8) / 2} y={95 - (7.5/10)*85 + 8} fill={C.lavender} fontSize="2.8" textAnchor="middle" fontWeight="700" opacity="0.6">EMERGING</text>
-          <text x={(8 + (7.5/10)*88 + 8) / 2} y={95 - (7.5/10)*85 + 11.5} fill="rgba(255,255,255,0.25)" fontSize="1.8" textAnchor="middle">Lower signal, low readiness</text>
+          <text x={MX + W/4} y={T + H/4 - 3} fill={C.yellow} fontSize="2.8" textAnchor="middle" fontWeight="700" opacity="0.6">CRITICAL WATCH</text>
+          <text x={MX + W/4} y={T + H/4} fill="rgba(255,255,255,0.25)" fontSize="1.8" textAnchor="middle">High signal, high readiness</text>
 
-          <text x={(98 + (7.5/10)*88 + 8) / 2} y={95 - (7.5/10)*85 + 8} fill={C.mint} fontSize="2.8" textAnchor="middle" fontWeight="700" opacity="0.6">ESTABLISHED</text>
-          <text x={(98 + (7.5/10)*88 + 8) / 2} y={95 - (7.5/10)*85 + 11.5} fill="rgba(255,255,255,0.25)" fontSize="1.8" textAnchor="middle">Lower signal, high readiness</text>
+          <text x={L + W/4} y={MY + H/4 - 3} fill={C.lavender} fontSize="2.8" textAnchor="middle" fontWeight="700" opacity="0.6">EMERGING</text>
+          <text x={L + W/4} y={MY + H/4} fill="rgba(255,255,255,0.25)" fontSize="1.8" textAnchor="middle">Lower signal, low readiness</text>
+
+          <text x={MX + W/4} y={MY + H/4 - 3} fill={C.mint} fontSize="2.8" textAnchor="middle" fontWeight="700" opacity="0.6">ESTABLISHED</text>
+          <text x={MX + W/4} y={MY + H/4} fill="rgba(255,255,255,0.25)" fontSize="1.8" textAnchor="middle">Lower signal, high readiness</text>
         </svg>
 
         {/* Axis labels */}
-        <div className="absolute bottom-0 left-0 right-0 text-center" style={{ color: C.gray, fontSize: 12, paddingBottom: 0 }}>
+        <div className="absolute bottom-0 left-0 right-0 text-center" style={{ color: C.gray, fontSize: 12 }}>
           Enterprise Readiness →
         </div>
-        <div className="absolute top-0 left-0 bottom-0 flex items-center" style={{ color: C.gray, fontSize: 12, writingMode: "vertical-rl", transform: "rotate(180deg)", paddingLeft: 0 }}>
+        <div className="absolute top-0 left-0 bottom-0 flex items-center" style={{ color: C.gray, fontSize: 12, writingMode: "vertical-rl", transform: "rotate(180deg)" }}>
           Signal Strength →
         </div>
 
         {/* Data points with jitter */}
         {signals.map((s) => {
           const [jx, jy] = JITTER[s.id] || [0, 0];
-          const x = (s.enterprise_readiness / 10) * 88 + 8 + jx;
-          const y = 95 - (s.signal_strength / 10) * 85 + jy;
+          const x = L + (s.enterprise_readiness / 10) * W + jx;
+          const y = B - (s.signal_strength / 10) * H + jy;
           const isHovered = hovered === s.id;
           return (
             <div key={s.id}>
