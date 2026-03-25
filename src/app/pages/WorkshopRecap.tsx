@@ -131,7 +131,7 @@ export function WorkshopRecap() {
       {/* ───────── B-roll establishing shot ───────── */}
       <section style={{ backgroundColor: C.black }} className="py-2">
         <div className="max-w-[1400px] mx-auto">
-          <WImg src={img("broll/DJI_1_frame_0005.jpg")} alt="Overhead view of full workshop room with round tables" />
+          <WImg src={img("broll/DJI_2_frame_0001.jpg")} alt="Full room — everyone heads down working at round tables" />
           <p style={{ fontSize: 12, color: C.gray, textAlign: "center", padding: "8px 0" }}>Full room — 64 participants across round tables, Hilton Austin</p>
         </div>
       </section>
