@@ -240,27 +240,32 @@ type SortKey = "id" | "signal_strength" | "enterprise_readiness";
 
 /* ───────── Jitter offsets to spread overlapping points ───────── */
 const JITTER: Record<number, [number, number]> = {
-  1: [-1.5, 1],    // 8,6
-  2: [1.5, -1],    // 8,7
-  3: [1, 1.5],     // 9,9
-  4: [0, 0],       // 7,5 — alone
-  5: [-2, -1.5],   // 8,6
-  6: [-1, -1.5],   // 9,10
-  7: [1.5, 1],     // 8,9
-  8: [-1.5, -0.5], // 9,8
-  9: [0, 0],       // 8,8 — alone
-  10: [0, 0],      // 7,7 — alone
+  1: [-1, 1.5],    // 8,6 → Disruption Risk
+  2: [2, -1.5],    // 8,7 → Critical Watch (near border)
+  3: [1, 2],       // 9,9 → Critical Watch
+  4: [0, 0],       // 7,5 → Emerging (alone)
+  5: [1, -1.5],    // 8,6 → Disruption Risk
+  6: [-1.5, -2],   // 9,10 → Critical Watch (far right)
+  7: [2, 1.5],     // 8,9 → Critical Watch
+  8: [-2, -0.5],   // 9,8 → Critical Watch
+  9: [-1, 1],      // 8,8 → Critical Watch
+  10: [0, 0],      // 7,7 → Established (alone)
 };
 
 /* ───────── Interactive Scatter Chart ───────── */
 function SignalChart({ onSelect }: { onSelect: (id: number) => void }) {
   const [hovered, setHovered] = useState<number | null>(null);
 
-  /* Chart area: left=10, right=98, top=4, bottom=96 => w=88, h=92. Midpoint at 54, 50 */
+  /* Chart area constants */
   const L = 10, R = 98, T = 4, B = 96;
   const W = R - L, H = B - T;
-  const MX = L + W / 2; // 54 — vertical midpoint
-  const MY = T + H / 2; // 50 — horizontal midpoint
+  /* Divider positions tuned to distribute signals across quadrants:
+     Vertical split at readiness=7, Horizontal split at strength=7.5.
+     Disruption Risk: 1,5 | Critical Watch: 2,3,6,7,8,9 | Emerging: 4 | Established: 10 */
+  const splitReadiness = 7;
+  const splitStrength = 7.5;
+  const MX = L + (splitReadiness / 10) * W;
+  const MY = B - (splitStrength / 10) * H;
 
   return (
     <div className="relative w-full" style={{ paddingBottom: "60%", minHeight: 400 }}>
