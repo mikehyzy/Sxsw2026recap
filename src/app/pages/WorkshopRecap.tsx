@@ -250,7 +250,7 @@ export function WorkshopRecap() {
           <h2 style={{ fontSize: 28, fontWeight: 700, color: C.darkGray }} className="mb-8">The Room</h2>
           <div className="grid md:grid-cols-3 gap-4 mb-4">
             <WImg src={img("canon/MVI_5632_frame_0006.jpg")} alt="Thank You slide with both facilitators and full audience" />
-            <WImg src={img("canon/MVI_5632_frame_0011.jpg")} alt="Post-session: people lingering, examining work, networking" />
+            <WImg src={img("canon/MVI_5632_frame_0010.jpg")} alt="Both facilitators standing with full room and Thank You slide" />
             <WImg src={img("canon/MVI_5632_frame_0015.jpg")} alt="Materials and participant artwork remaining on tables" />
           </div>
           <p style={{ fontSize: 15, lineHeight: 1.8, color: C.darkGray }} className="mt-6">
