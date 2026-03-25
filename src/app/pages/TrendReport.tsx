@@ -238,44 +238,82 @@ const RISK_COLORS: Record<string, string> = {
 
 type SortKey = "id" | "signal_strength" | "enterprise_readiness";
 
+/* ───────── Jitter offsets to spread overlapping points ───────── */
+const JITTER: Record<number, [number, number]> = {
+  1: [-1.5, 1],    // 8,6
+  2: [1.5, -1],    // 8,7
+  3: [1, 1.5],     // 9,9
+  4: [0, 0],       // 7,5 — alone
+  5: [-2, -1.5],   // 8,6
+  6: [-1, -1.5],   // 9,10
+  7: [1.5, 1],     // 8,9
+  8: [-1.5, -0.5], // 9,8
+  9: [0, 0],       // 8,8 — alone
+  10: [0, 0],      // 7,7 — alone
+};
+
 /* ───────── Interactive Scatter Chart ───────── */
 function SignalChart({ onSelect }: { onSelect: (id: number) => void }) {
   const [hovered, setHovered] = useState<number | null>(null);
-  const chartW = 100; // percentage-based
-  const chartH = 100;
 
   return (
     <div className="relative w-full" style={{ paddingBottom: "60%", minHeight: 400 }}>
       <div className="absolute inset-0">
-        {/* Grid lines */}
+        {/* SVG grid, quadrant lines, and labels */}
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-          {[2, 4, 6, 8, 10].map((v) => (
-            <line key={`h${v}`} x1="0" y1={chartH - v * 10} x2={chartW} y2={chartH - v * 10} stroke="rgba(255,255,255,0.08)" strokeWidth="0.3" />
+          {/* Minor grid */}
+          {[1,2,3,4,5,6,7,8,9,10].map((v) => (
+            <line key={`h${v}`} x1="8" y1={95 - (v / 10) * 85} x2="98" y2={95 - (v / 10) * 85} stroke="rgba(255,255,255,0.06)" strokeWidth="0.2" />
           ))}
-          {[2, 4, 6, 8, 10].map((v) => (
-            <line key={`v${v}`} x1={v * 10} y1="0" x2={v * 10} y2={chartH} stroke="rgba(255,255,255,0.08)" strokeWidth="0.3" />
+          {[1,2,3,4,5,6,7,8,9,10].map((v) => (
+            <line key={`v${v}`} x1={(v / 10) * 88 + 8} y1="2" x2={(v / 10) * 88 + 8} y2="95" stroke="rgba(255,255,255,0.06)" strokeWidth="0.2" />
           ))}
+          {/* Axis tick labels */}
+          {[2,4,6,8,10].map((v) => (
+            <text key={`yl${v}`} x="6" y={95 - (v / 10) * 85 + 1} fill="rgba(255,255,255,0.3)" fontSize="2.2" textAnchor="end">{v}</text>
+          ))}
+          {[2,4,6,8,10].map((v) => (
+            <text key={`xl${v}`} x={(v / 10) * 88 + 8} y="99" fill="rgba(255,255,255,0.3)" fontSize="2.2" textAnchor="middle">{v}</text>
+          ))}
+          {/* QUADRANT DIVIDER LINES — thick and visible */}
+          {/* Horizontal: signal_strength = 7.5 (between 7 and 8) */}
+          <line x1="8" y1={95 - (7.5 / 10) * 85} x2="98" y2={95 - (7.5 / 10) * 85} stroke="rgba(255,255,255,0.25)" strokeWidth="0.4" strokeDasharray="2,1" />
+          {/* Vertical: enterprise_readiness = 7.5 */}
+          <line x1={(7.5 / 10) * 88 + 8} y1="2" x2={(7.5 / 10) * 88 + 8} y2="95" stroke="rgba(255,255,255,0.25)" strokeWidth="0.4" strokeDasharray="2,1" />
+
+          {/* Quadrant background tints */}
+          <rect x="8" y="2" width={(7.5/10)*88} height={95 - (95 - (7.5/10)*85)} rx="1" fill="rgba(255,182,208,0.04)" />
+          <rect x={(7.5/10)*88+8} y="2" width={98-(7.5/10)*88-8} height={95 - (95 - (7.5/10)*85)} rx="1" fill="rgba(255,199,0,0.04)" />
+          <rect x="8" y={95 - (7.5/10)*85} width={(7.5/10)*88} height={(7.5/10)*85} rx="1" fill="rgba(192,168,240,0.04)" />
+          <rect x={(7.5/10)*88+8} y={95 - (7.5/10)*85} width={98-(7.5/10)*88-8} height={(7.5/10)*85} rx="1" fill="rgba(168,245,200,0.04)" />
+
           {/* Quadrant labels */}
-          <text x="25" y="20" fill="rgba(255,255,255,0.15)" fontSize="3" textAnchor="middle" fontWeight="600">DISRUPTION RISK</text>
-          <text x="25" y="23" fill="rgba(255,255,255,0.1)" fontSize="2" textAnchor="middle">High signal, low readiness</text>
-          <text x="75" y="20" fill="rgba(255,255,255,0.15)" fontSize="3" textAnchor="middle" fontWeight="600">CRITICAL WATCH</text>
-          <text x="75" y="23" fill="rgba(255,255,255,0.1)" fontSize="2" textAnchor="middle">High signal, high readiness</text>
-          <text x="25" y="80" fill="rgba(255,255,255,0.1)" fontSize="2.5" textAnchor="middle">EMERGING</text>
-          <text x="75" y="80" fill="rgba(255,255,255,0.1)" fontSize="2.5" textAnchor="middle">ESTABLISHED</text>
+          <text x={(8 + (7.5/10)*88 + 8) / 2} y="8" fill={C.pink} fontSize="2.8" textAnchor="middle" fontWeight="700" opacity="0.6">DISRUPTION RISK</text>
+          <text x={(8 + (7.5/10)*88 + 8) / 2} y="11.5" fill="rgba(255,255,255,0.25)" fontSize="1.8" textAnchor="middle">High signal, low readiness</text>
+
+          <text x={(98 + (7.5/10)*88 + 8) / 2} y="8" fill={C.yellow} fontSize="2.8" textAnchor="middle" fontWeight="700" opacity="0.6">CRITICAL WATCH</text>
+          <text x={(98 + (7.5/10)*88 + 8) / 2} y="11.5" fill="rgba(255,255,255,0.25)" fontSize="1.8" textAnchor="middle">High signal, high readiness</text>
+
+          <text x={(8 + (7.5/10)*88 + 8) / 2} y={95 - (7.5/10)*85 + 8} fill={C.lavender} fontSize="2.8" textAnchor="middle" fontWeight="700" opacity="0.6">EMERGING</text>
+          <text x={(8 + (7.5/10)*88 + 8) / 2} y={95 - (7.5/10)*85 + 11.5} fill="rgba(255,255,255,0.25)" fontSize="1.8" textAnchor="middle">Lower signal, low readiness</text>
+
+          <text x={(98 + (7.5/10)*88 + 8) / 2} y={95 - (7.5/10)*85 + 8} fill={C.mint} fontSize="2.8" textAnchor="middle" fontWeight="700" opacity="0.6">ESTABLISHED</text>
+          <text x={(98 + (7.5/10)*88 + 8) / 2} y={95 - (7.5/10)*85 + 11.5} fill="rgba(255,255,255,0.25)" fontSize="1.8" textAnchor="middle">Lower signal, high readiness</text>
         </svg>
 
         {/* Axis labels */}
-        <div className="absolute bottom-0 left-0 right-0 text-center" style={{ color: C.gray, fontSize: 12, paddingBottom: 2 }}>
+        <div className="absolute bottom-0 left-0 right-0 text-center" style={{ color: C.gray, fontSize: 12, paddingBottom: 0 }}>
           Enterprise Readiness →
         </div>
-        <div className="absolute top-0 left-0 bottom-0 flex items-center" style={{ color: C.gray, fontSize: 12, writingMode: "vertical-rl", transform: "rotate(180deg)", paddingLeft: 2 }}>
+        <div className="absolute top-0 left-0 bottom-0 flex items-center" style={{ color: C.gray, fontSize: 12, writingMode: "vertical-rl", transform: "rotate(180deg)", paddingLeft: 0 }}>
           Signal Strength →
         </div>
 
-        {/* Data points */}
+        {/* Data points with jitter */}
         {signals.map((s) => {
-          const x = (s.enterprise_readiness / 10) * 90 + 5;
-          const y = 95 - (s.signal_strength / 10) * 90;
+          const [jx, jy] = JITTER[s.id] || [0, 0];
+          const x = (s.enterprise_readiness / 10) * 88 + 8 + jx;
+          const y = 95 - (s.signal_strength / 10) * 85 + jy;
           const isHovered = hovered === s.id;
           return (
             <div key={s.id}>
