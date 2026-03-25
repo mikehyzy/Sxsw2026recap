@@ -2,26 +2,146 @@
   "quotes": [
     {
       "id": "q1",
-      "text": "Replace with actual quote from SXSW session or conversation.",
-      "attribution": "Speaker Name",
-      "role": "Title, Company",
-      "context": "Session or event name",
+      "text": "We're entering the era of super companies. Super companies will be the only companies, in my opinion, that survive.",
+      "attribution": "AI Company CEO",
+      "role": "Founder, 7th startup",
+      "context": "Lose Your Mind to AI",
       "color": "green"
     },
     {
       "id": "q2",
-      "text": "Replace with actual quote.",
-      "attribution": "Speaker Name",
-      "role": "Title, Company",
-      "context": "Session or event name",
+      "text": "Yes. We're failing at AI. But it's not because the tools aren't good enough. We're failing because we're designing for a system that's already obsolete.",
+      "attribution": "Ian Beacraft",
+      "role": "CEO, Signal and Cipher",
+      "context": "How to Design a Company That AI Can't Outpace",
       "color": "coral"
     },
     {
       "id": "q3",
-      "text": "Replace with actual quote.",
-      "attribution": "Speaker Name",
-      "role": "Title, Company",
-      "context": "Session or event name",
+      "text": "Are we living through a 1929 moment and don't know it yet?",
+      "attribution": "Andrew Ross Sorkin",
+      "role": "Journalist, Author, CNBC Anchor",
+      "context": "A 1929 Warning for the AI Age",
+      "color": "dark"
+    },
+    {
+      "id": "q4",
+      "text": "I build these things because I want them to exist.",
+      "attribution": "Tom Sachs",
+      "role": "Artist",
+      "context": "Sympathetic Magic, Plywood, and the Power of Believing",
+      "color": "green"
+    },
+    {
+      "id": "q5",
+      "text": "75% of you will be passengers. 25% will be drivers. I think this is default best case. It's not good.",
+      "attribution": "AI Company CEO",
+      "role": "Founder, 7th startup",
+      "context": "Lose Your Mind to AI",
+      "color": "coral"
+    },
+    {
+      "id": "q6",
+      "text": "Nobody is coming to save you. If you want agency, you have to take action.",
+      "attribution": "Amy Webb",
+      "role": "Founder & CEO, Future Today Institute",
+      "context": "Convergence Outlook: From Trend Reports to Systems Thinking",
+      "color": "dark"
+    },
+    {
+      "id": "q7",
+      "text": "People who understand people always win.",
+      "attribution": "Rohit Bhargava",
+      "role": "Founder, Non-Obvious Company",
+      "context": "5 Non-Obvious Secrets of Human Connection",
+      "color": "green"
+    },
+    {
+      "id": "q8",
+      "text": "We are about to witness the highest failure rate for a single cohort of startups in the history of tech.",
+      "attribution": "Mark Roberge",
+      "role": "Former CRO, HubSpot",
+      "context": "The Science of Scaling",
+      "color": "coral"
+    },
+    {
+      "id": "q9",
+      "text": "Loneliness is now a market. Dependency is the product.",
+      "attribution": "Amy Webb",
+      "role": "Founder & CEO, Future Today Institute",
+      "context": "Convergence Outlook: From Trend Reports to Systems Thinking",
+      "color": "dark"
+    },
+    {
+      "id": "q10",
+      "text": "Companies don't have an AI problem. They have a design problem.",
+      "attribution": "Ian Beacraft",
+      "role": "CEO, Signal and Cipher",
+      "context": "How to Design a Company That AI Can't Outpace",
+      "color": "green"
+    },
+    {
+      "id": "q11",
+      "text": "Speculation is the twin of innovation.",
+      "attribution": "Andrew Ross Sorkin",
+      "role": "Journalist, Author, CNBC Anchor",
+      "context": "A 1929 Warning for the AI Age",
+      "color": "coral"
+    },
+    {
+      "id": "q12",
+      "text": "Work is the ritual. It is my sympathetic magic.",
+      "attribution": "Tom Sachs",
+      "role": "Artist",
+      "context": "Sympathetic Magic, Plywood, and the Power of Believing",
+      "color": "dark"
+    },
+    {
+      "id": "q13",
+      "text": "The most underestimated skill in business is the ability to tell a compelling story.",
+      "attribution": "Serena Williams",
+      "role": "Founder, Serena Ventures",
+      "context": "Health Equity Meets Founder-Led Innovation",
+      "color": "green"
+    },
+    {
+      "id": "q14",
+      "text": "I think the future of smartphones or operating systems should just be: I know you very well, and if I know your intention, I just do it for you.",
+      "attribution": "Carl Pei",
+      "role": "CEO, Nothing",
+      "context": "The End of Smartphone Apps",
+      "color": "coral"
+    },
+    {
+      "id": "q15",
+      "text": "You have to get really, really disciplined about asking, what is actually changing, what is the thing that's actually shifting? Do not forgo judgment for efficiency.",
+      "attribution": "Sam Jordan",
+      "role": "Strategist",
+      "context": "The Great Flip: Why Every Industry Is Running Backwards",
+      "color": "dark"
+    },
+    {
+      "id": "q16",
+      "text": "This is not an efficiency gain. This is a compression of decades of competitive infrastructure into a single afternoon.",
+      "attribution": "Amy Webb",
+      "role": "Founder & CEO, Future Today Institute",
+      "context": "Convergence Outlook: From Trend Reports to Systems Thinking",
+      "color": "green"
+    },
+    {
+      "id": "q17",
+      "text": "I don't want to build one model for everything. I want to build many models for many different kinds of people in the world, because there's no one way of being human.",
+      "attribution": "Timnit Gebru",
+      "role": "Founder, DAIR Institute",
+      "context": "Reclaiming Our Humanity",
+      "color": "coral"
+    },
+    {
+      "id": "q18",
+      "text": "Execution has become a commodity.",
+      "attribution": "Ian Beacraft",
+      "role": "CEO, Signal and Cipher",
+      "context": "How to Design a Company That AI Can't Outpace",
       "color": "dark"
     }
   ]
