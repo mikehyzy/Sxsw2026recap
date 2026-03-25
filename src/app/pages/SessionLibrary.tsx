@@ -1,5 +1,60 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useCallback } from "react";
 import { Search, ChevronDown, ChevronUp, Download, X } from "lucide-react";
+
+/* ───────── Simple Markdown Renderer ───────── */
+function renderMarkdown(md: string): string {
+  return md
+    // Remove the first H1 (already shown in card title)
+    .replace(/^# .+\n/, "")
+    // H2 headings
+    .replace(/^## (.+)$/gm, '<h2 style="font-size:22px;font-weight:700;color:#1A1A1A;margin:28px 0 12px;border-bottom:1px solid #E0E0E0;padding-bottom:8px">$1</h2>')
+    // H3 headings
+    .replace(/^### (.+)$/gm, '<h3 style="font-size:18px;font-weight:700;color:#1A1A1A;margin:20px 0 8px">$1</h3>')
+    // Bold
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    // Italic
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    // Blockquotes
+    .replace(/^> (.+)$/gm, '<blockquote style="border-left:3px solid #7B61FF;padding-left:16px;margin:12px 0;font-style:italic;color:#1A1A1A">$1</blockquote>')
+    // Unordered lists
+    .replace(/^- (.+)$/gm, '<li style="margin:4px 0;padding-left:4px">$1</li>')
+    // Wrap consecutive <li> in <ul>
+    .replace(/((?:<li[^>]*>.*<\/li>\n?)+)/g, '<ul style="list-style:disc;padding-left:20px;margin:8px 0;font-size:15px;line-height:1.7;color:#1A1A1A">$1</ul>')
+    // Ordered lists
+    .replace(/^\d+\. (.+)$/gm, '<li style="margin:4px 0">$1</li>')
+    // Horizontal rules
+    .replace(/^---$/gm, '<hr style="border:none;border-top:1px solid #E0E0E0;margin:24px 0" />')
+    // Links
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener" style="color:#7B61FF;text-decoration:underline">$1</a>')
+    // Paragraphs: wrap non-tag lines
+    .replace(/^(?!<[a-z])((?!\s*$).+)$/gm, '<p style="font-size:15px;line-height:1.8;color:#1A1A1A;margin:8px 0">$1</p>')
+    // Clean up empty paragraphs
+    .replace(/<p[^>]*>\s*<\/p>/g, "");
+}
+
+/* ───────── Full Recap Content Component ───────── */
+function FullRecapContent({ filename }: { filename: string }) {
+  const [content, setContent] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch(`${import.meta.env.BASE_URL}content/session-recaps/${filename}`)
+      .then(r => r.text())
+      .then(text => { setContent(text); setLoading(false); })
+      .catch(() => { setContent(null); setLoading(false); });
+  }, [filename]);
+
+  if (loading) return <p style={{ color: "#6B6B6B", fontSize: 14, padding: "20px 0" }}>Loading full recap...</p>;
+  if (!content) return <p style={{ color: "#6B6B6B", fontSize: 14, padding: "20px 0" }}>Could not load recap.</p>;
+
+  return (
+    <div
+      className="prose-custom"
+      dangerouslySetInnerHTML={{ __html: renderMarkdown(content) }}
+    />
+  );
+}
 
 /* ───────── Palette ───────── */
 const C = {
@@ -604,31 +659,27 @@ export function SessionLibrary() {
 
                     {isExpanded && (
                       <div style={{ borderTop: `1px solid ${C.border}` }} className="pt-4 mt-2">
-                        {/* Themes */}
-                        <p style={{ fontSize: 12, textTransform: "uppercase", color: C.purple, letterSpacing: "0.08em", fontWeight: 600 }} className="mb-2">Key Themes</p>
-                        <div className="flex flex-wrap gap-2 mb-4">
+                        {/* Key Themes pills */}
+                        <div className="flex flex-wrap gap-2 mb-6">
                           {s.themes.map((t) => (
                             <span key={t} className="px-3 py-1 rounded-full" style={{ fontSize: 12, backgroundColor: `${trackColor}20`, color: C.darkGray, border: `1px solid ${trackColor}40` }}>{t}</span>
                           ))}
                         </div>
 
-                        {/* Notable Quote */}
-                        <blockquote className="my-4 pl-5 py-3" style={{ borderLeft: `3px solid ${trackColor}` }}>
-                          <p style={{ fontSize: 15, fontStyle: "italic", lineHeight: 1.7, color: C.darkGray }}>&ldquo;{s.topQuote}&rdquo;</p>
-                          <footer className="mt-2">
-                            <span style={{ fontSize: 13, fontWeight: 600, color: C.purple }}>{s.quoteAttribution}</span>
-                          </footer>
-                        </blockquote>
+                        {/* Full Recap Content */}
+                        <FullRecapContent filename={s.filename} />
 
                         {/* Download */}
-                        <a
-                          href={`${import.meta.env.BASE_URL}content/session-recaps/${s.filename}`}
-                          download={s.filename}
-                          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg transition-colors hover:opacity-80 mt-2"
-                          style={{ fontSize: 13, backgroundColor: C.purple, color: "white", fontWeight: 600, borderRadius: 8 }}
-                        >
-                          <Download size={14} /> Download Recap
-                        </a>
+                        <div className="mt-8 pt-4" style={{ borderTop: `1px solid ${C.border}` }}>
+                          <a
+                            href={`${import.meta.env.BASE_URL}content/session-recaps/${s.filename}`}
+                            download={s.filename}
+                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg transition-colors hover:opacity-80"
+                            style={{ fontSize: 14, backgroundColor: C.purple, color: "white", fontWeight: 600, borderRadius: 8 }}
+                          >
+                            <Download size={16} /> Download Full Recap (.md)
+                          </a>
+                        </div>
                       </div>
                     )}
 
