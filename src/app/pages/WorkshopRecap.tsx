@@ -155,10 +155,9 @@ export function WorkshopRecap() {
             <p style={{ fontSize: 16, lineHeight: 1.8, color: C.darkGray }} className="mb-6">
               The original Surrealist game asked one player to secretly choose an object and describe it using properties of a completely different object, forcing metaphorical leaps that bypassed rational thought. Between rounds, the facilitator called "CHANGE PLACES" — a Situationist-inspired disruption where participants physically moved, breaking social comfort and forcing new collaborations.
             </p>
-            <div className="grid md:grid-cols-3 gap-4 mb-4">
+            <div className="grid md:grid-cols-2 gap-4 mb-4">
               <WImg src={img("canon/MVI_5629_frame_0005.jpg")} alt="Mike Hyzy circulating among tables during One Into Another exercise" />
               <WImg src={img("canon/MVI_5629_frame_0007.jpg")} alt="CHANGE PLACES slide with participant artwork on screen" />
-              <WImg src={img("canon/MVI_5629_frame_0009.jpg")} alt="Michael Marshall presenting with Surrealist illustration" />
             </div>
           </Expand>
 
@@ -170,8 +169,9 @@ export function WorkshopRecap() {
             <p style={{ fontSize: 16, lineHeight: 1.8, color: C.darkGray }} className="mb-6">
               This provocation trained participants in a skill essential to futures work: interpreting ambiguous visual signals and constructing meaning from incomplete information. The "I suppose..." framing explicitly separates assumption from reality — a critical distinction when working with uncertain futures.
             </p>
-            <div className="grid md:grid-cols-2 gap-4 mb-4">
+            <div className="grid md:grid-cols-3 gap-4 mb-4">
               <WImg src={img("canon/MVI_5630_frame_0002.jpg")} alt="En L'An 2000 instructions slide" />
+              <WImg src={img("canon/MVI_5629_frame_0009.jpg")} alt="Michael Marshall presenting En L'An 2000 card — 'A l'ecole / At School'" />
               <WImg src={img("broll/DJI_2_frame_0004.jpg")} alt="Wide room angle — multiple tables deep in the card exercise" />
             </div>
           </Expand>
