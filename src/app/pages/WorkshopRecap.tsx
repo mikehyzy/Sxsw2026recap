@@ -248,8 +248,7 @@ export function WorkshopRecap() {
       <section style={{ backgroundColor: C.lightBg }} className="py-16">
         <div className="max-w-[1200px] mx-auto px-6">
           <h2 style={{ fontSize: 28, fontWeight: 700, color: C.darkGray }} className="mb-8">The Room</h2>
-          <div className="grid md:grid-cols-3 gap-4 mb-4">
-            <WImg src={img("canon/MVI_5632_frame_0006.jpg")} alt="Thank You slide with both facilitators and full audience" />
+          <div className="grid md:grid-cols-2 gap-4 mb-4">
             <WImg src={img("canon/MVI_5632_frame_0010.jpg")} alt="Both facilitators standing with full room and Thank You slide" />
             <WImg src={img("canon/MVI_5632_frame_0015.jpg")} alt="Materials and participant artwork remaining on tables" />
           </div>
