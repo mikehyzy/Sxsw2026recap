@@ -57,7 +57,7 @@ const secondaryQuotes = [
     text: "75% of you will be passengers. 25% will be drivers. I think this is default best case. It's not good.",
     speaker: "Greg Shove, CEO of Section AI",
     session: "Lose Your Mind to AI",
-    bg: C.darkGray,
+    bg: C.purple,
   },
   {
     text: "I build these things because I want them to exist.",
