@@ -1,5 +1,5 @@
 export const IMAGES = {
-  hero: "https://images.unsplash.com/photo-1760386129113-6e20e3b59731?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxTWFNXJTIwQXVzdGluJTIwY29uZmVyZW5jZSUyMHN0YWdlfGVufDF8fHx8MTc3NDM2MDk2MHww&ixlib=rb-4.1.0&q=80&w=1080",
+  hero: "https://images-r2.thebrag.com/mw/uploads/2026/03/SXSW-digital-marketing-Hero.png",
   workshop: "https://images.unsplash.com/photo-1768796370577-c6e8b708b980?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMHdvcmtzaG9wJTIwYnJhaW5zdG9ybWluZyUyMHdoaXRlYm9hcmR8ZW58MXx8fHwxNzc0MzYwOTYxfDA&ixlib=rb-4.1.0&q=80&w=1080",
   austin: "https://images.unsplash.com/photo-1726303325145-3587ea11259d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxBdXN0aW4lMjBUZXhhcyUyMGNpdHlzY2FwZSUyMG5pZ2h0fGVufDF8fHx8MTc3NDM2MDk2MXww&ixlib=rb-4.1.0&q=80&w=1080",
   bookSigning: "https://images.unsplash.com/photo-1772196774992-a7ef386713b6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxib29rJTIwc2lnbmluZyUyMGV2ZW50JTIwYXV0aG9yfGVufDF8fHx8MTc3NDM1ODk5NXww&ixlib=rb-4.1.0&q=80&w=1080",
@@ -14,4 +14,15 @@ export const IMAGES = {
   networking: "https://images.unsplash.com/photo-1768508663341-ed48fd1e69d8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuZXR3b3JraW5nJTIwZXZlbnQlMjBkcmlua3MlMjBzb2NpYWx8ZW58MXx8fHwxNzc0MzYwOTY2fDA&ixlib=rb-4.1.0&q=80&w=1080",
   innovation: "https://images.unsplash.com/photo-1771189956777-575006b6b145?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbm5vdmF0aW9uJTIwdGVjaG5vbG9neSUyMGFic3RyYWN0fGVufDF8fHx8MTc3NDI3NDM0NHww&ixlib=rb-4.1.0&q=80&w=1080",
   game: "https://images.unsplash.com/photo-1695462131540-5e91d57a2e51?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnYW1pZmljYXRpb24lMjBnYW1lJTIwY29udHJvbGxlciUyMGRlc2lnbnxlbnwxfHx8fDE3NzQzNjA5Njd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+  // SXSW 2026 real event images
+  amyWebb: "https://images-r2.thebrag.com/mw/uploads/2026/03/SXSW-digital-marketing-Amy-Webb.png",
+  amyWebbBand: "https://images-r2.thebrag.com/mw/uploads/2026/03/SXSW-digital-marketing-Marching-band.png",
+  spielberg: "https://nofilmschool.com/media-library/steven-spielberg.jpg?id=65285108&width=1245&height=700&coordinates=0%2C0%2C0%2C0",
+  cochranKeyArt: "https://overstory.design/wp-content/uploads/2025/09/SX_.jpg",
+  cochranDetail: "https://overstory.design/wp-content/uploads/2025/09/SX_4.jpg",
+  matthewPrince: "https://images-r2.thebrag.com/mw/uploads/2026/03/SXSW-digital-marketing-Cloudflare.png",
+  fabulaRasa: "https://arvore.io/files/Fabula-Rasa_Key-Art-1920x1080.webp",
+  aiDoc: "https://www.denofgeek.com/wp-content/uploads/2026/03/Daniel-Kwan-and-Tristan-Harris-at-SXSW.jpg",
+  rivian: "https://exposure.accelerator.net/production/photos/39p7i2jn5tu0ufa5gqxgn2jzlwy6fps1eeug/original.jpg",
+  brandActivations: "https://static-www.adweek.com/wp-content/uploads/2026/03/sxsw-brand-activations-2026-1.jpg?w=1200&h=675&crop=1",
 };
