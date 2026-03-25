@@ -241,7 +241,7 @@ export function Home() {
             </p>
           </div>
           <div className="flex-shrink-0">
-            <img src="/hero.jpg" alt="SXSW 2026 stage presentation" className="rounded-lg object-cover" style={{ width: 500, height: 400 }} />
+            <img src={`${import.meta.env.BASE_URL}hero.jpg`} alt="SXSW 2026 stage presentation" className="rounded-lg object-cover" style={{ width: 500, height: 400 }} />
           </div>
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-32" style={{ background: `linear-gradient(to bottom, transparent, ${C.lightBg})` }} />
