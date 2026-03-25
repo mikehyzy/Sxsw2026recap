@@ -660,11 +660,19 @@ export function SessionLibrary() {
                     {isExpanded && (
                       <div style={{ borderTop: `1px solid ${C.border}` }} className="pt-4 mt-2">
                         {/* Key Themes pills */}
-                        <div className="flex flex-wrap gap-2 mb-6">
+                        <div className="flex flex-wrap gap-2 mb-5">
                           {s.themes.map((t) => (
                             <span key={t} className="px-3 py-1 rounded-full" style={{ fontSize: 12, backgroundColor: `${trackColor}20`, color: C.darkGray, border: `1px solid ${trackColor}40` }}>{t}</span>
                           ))}
                         </div>
+
+                        {/* Notable Quote */}
+                        <blockquote className="mb-6 pl-5 py-3" style={{ borderLeft: `3px solid ${trackColor}` }}>
+                          <p style={{ fontSize: 16, fontStyle: "italic", lineHeight: 1.7, color: C.darkGray }}>&ldquo;{s.topQuote}&rdquo;</p>
+                          <footer className="mt-2">
+                            <span style={{ fontSize: 13, fontWeight: 600, color: C.purple }}>{s.quoteAttribution}</span>
+                          </footer>
+                        </blockquote>
 
                         {/* Full Recap Content */}
                         <FullRecapContent filename={s.filename} />
